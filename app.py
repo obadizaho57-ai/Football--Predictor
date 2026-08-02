@@ -40,7 +40,7 @@ def refresh_predictions():
         logger.warning("FOOTBALL_DATA_API_KEY not set — skipping refresh.")
         return
 
-    fixtures = data_fetcher.get_upcoming_fixtures(days_ahead=3)
+    fixtures = data_fetcher.get_upcoming_fixtures(days_ahead=7)
     predictions = []
 
     for fx in fixtures:
