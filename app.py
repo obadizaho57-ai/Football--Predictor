@@ -41,6 +41,7 @@ def refresh_predictions():
         return
 
     fixtures = data_fetcher.get_upcoming_fixtures(days_ahead=7)
+    fixtures = sorted(fixtures, key=lambda f: f["kickoff"])[:15]  # cap volume so rate-limited calls stay reliable
     predictions = []
 
     for fx in fixtures:
