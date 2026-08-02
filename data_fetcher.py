@@ -26,6 +26,10 @@ COMPETITIONS = [
     "BL1",  # Bundesliga
     "FL1",  # Ligue 1
     "CL",   # Champions League
+    "BSA",  # Campeonato Brasileiro Série A (mid-season, active now)
+    "DED",  # Eredivisie
+    "ELC",  # Championship (England 2nd tier)
+    "PPL",  # Primeira Liga
 ]
 
 HEADERS = {"X-Auth-Token": API_KEY}
