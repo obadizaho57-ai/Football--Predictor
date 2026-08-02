@@ -11,6 +11,7 @@ Set it as the FOOTBALL_DATA_API_KEY environment variable.
 
 import os
 import requests
+import time
 from datetime import datetime, timedelta
 from typing import List, Dict
 
@@ -38,6 +39,7 @@ HEADERS = {"X-Auth-Token": API_KEY}
 def _get(path: str, params: dict = None) -> dict:
     resp = requests.get(f"{BASE_URL}{path}", headers=HEADERS, params=params, timeout=15)
     resp.raise_for_status()
+    time.sleep(6.5)  # stay under free-tier 10 requests/minute
     return resp.json()
 
 
