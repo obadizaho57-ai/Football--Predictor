@@ -41,7 +41,16 @@ def refresh_predictions():
         return
 
     fixtures = data_fetcher.get_upcoming_fixtures(days_ahead=7)
-    fixtures = sorted(fixtures, key=lambda f: f["kickoff"])[:15]  # cap volume so rate-limited calls stay reliable
+    # Spread coverage fairly across leagues instead of letting one league dominate
+    from collections import defaultdict
+    by_competition = defaultdict(list)
+    for f in fixtures:
+        by_competition[f["competition"]].append(f)
+    fixtures = []
+    for comp_fixtures in by_competition.values():
+        comp_fixtures = sorted(comp_fixtures, key=lambda f: f["kickoff"])[:3]  # max 3 per league
+        fixtures.extend(comp_fixtures)
+    fixtures = sorted(fixtures, key=lambda f: f["kickoff"])[:30]  # overall safety cap
     predictions = []
 
     for fx in fixtures:
